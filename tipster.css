@@ -1,0 +1,22 @@
+
+.tipster.tooltip {
+	color: #fff;
+	background: #000;
+	padding: 3.5px 9px;
+	font-size: 86%;
+	border-radius: 4px;
+	position: absolute;
+	z-index: 9000;
+	left: 0;
+	top: 0;
+
+	opacity: 0;
+
+	transition: opacity .3s;
+	-moz-transition: opacity .3s;
+	-webkit-transition: opacity .3s;
+}
+
+.tipster.tooltip.visible {
+	opacity: 0.9;
+}

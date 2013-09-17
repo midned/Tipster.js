@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+	<head>
+                <meta charset="utf-8">
+		<title>Tipster.js &middot; Tooltips to elements without jQuery</title>
+
+		<!-- Bootstrap core CSS -->
+		<link href="bootstrap.css" rel="stylesheet">
+
+		<!-- Tipster.js core css -->
+		<link href="../tipster.css" rel="stylesheet">
+	</head>
+	<body><br><hr>
+		<div class="container text-center">
+			<div class="panel text-center">
+				<h1>Tipster.js</h1>
+				<p>Add fancy tooltips to your elements with pure Javascript</p>
+			</div>
+
+			<section id="examples" class="panel panel-default">
+				<div class="panel-heading">
+					<h1>Examples:</h1>
+					<small>See the source code of the page and the "library" so learn how it works</small>
+				</div>
+
+				<div class="panel-body">
+					<article class="example">
+						<button class="btn btn-primary" data-direction="left" title="Tooltip left">Left</button>
+						<button class="btn btn-primary" title="Tooltip up">Up</button>
+						<button class="btn btn-primary" data-direction="down" title="Tooltip down">Down</button>
+						<button class="btn btn-primary" data-direction="right" data-tooltip="Tooltip right">Right</button>
+					</article>
+
+					<hr>
+
+					<article class="example">
+						<button class="btn btn-default" data-html="true" title="Html <strong>enabled</strong> (even if you don't want to)">Html enabled</button>
+						<button class="btn btn-default" title="Html <strong>disabled</strong>">Html disabled</button>
+					</article>
+
+					<hr>
+
+					<article class="example">
+						<button class="btn btn-danger"title="Ok, I lied">We don't have any tooltip sir</button>
+						<button class="btn btn-danger" title="We do">Or maybe...</button>
+						<button class="btn btn-success" id="show">Show them!</button>
+						<button class="btn btn-success" id="toggle">Toggle them!</button>
+					</article>
+				</div>
+			</section>
+		</div>
+
+		<script type="text/javascript" src="../Tipster.js"></script>
+		<script type="text/javascript">
+			var examples = document.body.getElementsByTagName('article');
+
+			/* Example 1 */
+			new Tipster('button', {context: examples[0]}); // context be like: `examples[0].querySelectorAll();`
+			// The tooltip direction will be automatically assigned using `data-direction` attribute
+			/* End: Example 1 */
+
+			/* Example 2 */
+			new Tipster(examples[1].getElementsByTagName('button'), {html: false});
+			// You say me not to allow them to have html (by default I won't allow them to)
+			// but I'll do what the element itself tells me to do, sorry yo
+			/* End: Example 2 */
+
+			/* Example 3 */
+			var buttons = examples[2].querySelectorAll('button'); // I won't take care of those without `title` or `data-tooltip` attribute neither
+
+			var tooltips = new Tipster(buttons, {manually: true});
+
+			var show = document.getElementById('show'),
+				toggle = document.getElementById('toggle');
+
+			show.addEventListener('click', function() {
+				// There are two ways to show the tooltips
+				/*
+				1-
+					buttons[0].tooltip.show();
+					buttons[1].tooltip.show();
+				2-
+					tooltips.show();
+				*/
+				tooltips.show();
+			});
+
+			toggle.addEventListener('click', function() {
+				// Same as before
+				// you can actually call `element.tooltip.toggle()`
+				tooltips.toggle();
+			});
+
+			// I suppose you already figured it out that you can call `hide` method, right?
+
+			/* End: Example 3 */
+		</script>
+	</body>
+</html>
